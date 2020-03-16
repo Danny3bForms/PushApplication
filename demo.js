@@ -42,7 +42,7 @@ MongoClient.connect(url, function(err, db) {
 
 	 	console.log('Hello')
 
-	 	console.log(req.body)
+	 	console.log(req.body.currentOS)
 
 	 	function _getMsg(st, callback) {
 		    dbo.collection(st).find().toArray(function (err, docs) {
