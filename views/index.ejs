@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+  <script>
+    function sendPush() {
+
+          let currentOS = document.getElementById('os').value;
+
+          let xmlhttp = new XMLHttpRequest();
+          let url = "http://localhost:4000/multiplePushNotifications";
+          xmlhttp.open("POST", url);
+          xmlhttp.send(JSON.stringify({"currentOS": currentOS})); 
+  }
+  </script>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+   <label for="os">Choose an OS:</label>
+
+    <select id="os">
+      <% for(var i=0; i<customers.length; i++) {%>
+        <option><%= customers[i].os %></option>
+      <% } %>
+    </select>
+
+    <button onclick="sendPush();">Send Push Notification</button>
+
+   <table class="table table borderless customers">
+    <thead>
+      <tr>
+        <th scope="col">OS</th>
+        <th scope="col">Token</th>
+        <th scope="col">Click to send push</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% for(var i=0; i<customers.length; i++) {%>
+        <tr>
+          <td><%= customers[i].os %></td>
+          <td><%= customers[i].token %></td>
+          <td><button>Send Push</button></td>
+        </tr>
+      <% } %>
+    </tbody>
+   </table>
+
+
+
+
+  <form action="/customers" method="POST">
+    <input type="text" placeholder="os" name="os">
+    <input type="text" placeholder="token" name="token">
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>
